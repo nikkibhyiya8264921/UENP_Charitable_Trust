@@ -5,25 +5,22 @@ import * as LucideIcons from "lucide-react";
 interface IconCardProps {
   title: string;
   description: string;
-  icon: string;
+  icon: keyof typeof LucideIcons;
   className?: string;
 }
 
-const IconCard: React.FC<IconCardProps> = ({
-  title,
-  description,
-  icon,
-  className = "",
-}) => {
-  // Dynamically get the icon from Lucide
-  const Icon = LucideIcons[icon as keyof typeof LucideIcons] || LucideIcons.Activity;
+const IconCard = ({ title, description, icon, className = "" }: IconCardProps) => {
+  // Dynamically get the icon component from lucide-react
+  const IconComponent = LucideIcons[icon];
 
   return (
-    <div className={`card-hover rounded-lg bg-white p-6 shadow-md ${className}`}>
-      <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-ngo-orange/10 text-ngo-orange">
-        <Icon size={28} />
+    <div className={`p-6 rounded-xl bg-white shadow-md hover:shadow-lg transition-shadow ${className}`}>
+      <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-ngo-orange/10">
+        {IconComponent && (
+          <IconComponent className="h-6 w-6 text-ngo-orange" />
+        )}
       </div>
-      <h3 className="mb-3 text-xl font-semibold">{title}</h3>
+      <h3 className="mb-2 text-xl font-semibold">{title}</h3>
       <p className="text-gray-600">{description}</p>
     </div>
   );

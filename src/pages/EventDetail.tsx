@@ -1,55 +1,54 @@
 
-import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useSiteData } from "@/context/SiteDataContext";
 import { Button } from "@/components/ui/button";
-import SectionTitle from "@/components/SectionTitle";
-import { CalendarDays, MapPin, Clock, ArrowLeft, Users, Calendar, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import { Calendar, Clock, MapPin, ArrowLeft, UserCheck } from "lucide-react";
 import { format } from "date-fns";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const EventDetail = () => {
   const { eventId } = useParams<{ eventId: string }>();
   const { siteData } = useSiteData();
   const [event, setEvent] = useState<any>(null);
-  const [relatedImages, setRelatedImages] = useState<any[]>([]);
-  
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (eventId && siteData.events) {
-      const foundEvent = siteData.events.find(e => e.id.toString() === eventId);
-      setEvent(foundEvent || null);
-      
-      // If event has gallery images, load them
-      if (foundEvent && foundEvent.gallery && foundEvent.gallery.length > 0) {
-        const galleryImages = foundEvent.gallery.map((imageId: number) => 
-          siteData.gallery.find(img => img.id === imageId)
-        ).filter(Boolean);
-        
-        setRelatedImages(galleryImages);
-      }
+      const foundEvent = siteData.events.find(
+        (e) => e.id === parseInt(eventId, 10)
+      );
+      setEvent(foundEvent);
+      setLoading(false);
     }
-  }, [eventId, siteData]);
+  }, [eventId, siteData.events]);
 
-  if (!event) {
+  if (loading) {
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h2 className="text-2xl font-bold mb-4">Event not found</h2>
-        <p className="mb-8">The event you're looking for doesn't exist or has been removed.</p>
-        <Link to="/events">
-          <Button>
-            <ArrowLeft size={16} className="mr-2" />
-            Back to Events
-          </Button>
-        </Link>
+      <div className="flex h-screen items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-ngo-orange border-t-transparent"></div>
       </div>
     );
   }
 
-  const eventDate = new Date(event.date);
-  const isPastEvent = eventDate < new Date();
+  if (!event) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center">
+        <h2 className="mb-4 text-2xl font-bold">Event Not Found</h2>
+        <p className="mb-6 text-gray-600">
+          The event you are looking for does not exist or has been removed.
+        </p>
+        <Button asChild>
+          <Link to="/events">Back to Events</Link>
+        </Button>
+      </div>
+    );
+  }
+
+  const isUpcoming = event.status === "upcoming";
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="relative h-[400px] md:h-[500px]">
         <div className="absolute inset-0">
@@ -58,137 +57,188 @@ const EventDetail = () => {
             alt={event.title}
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
-        <div className="container relative mx-auto flex h-full items-end pb-12 px-4">
-          <div className="max-w-3xl">
+        <div className="container relative mx-auto flex h-full items-end px-4 pb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
             <div className="mb-4">
-              {event.status === "upcoming" ? (
-                <span className="inline-block bg-ngo-orange text-white px-3 py-1 rounded-full text-sm font-medium">
-                  Upcoming Event
-                </span>
-              ) : (
-                <span className="inline-block bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  Past Event
-                </span>
-              )}
+              <span className={`rounded-full px-4 py-1 text-sm font-medium text-white ${
+                isUpcoming ? "bg-green-500" : "bg-gray-500"
+              }`}>
+                {isUpcoming ? "Upcoming Event" : "Past Event"}
+              </span>
             </div>
-            <h1 className="mb-4 text-3xl font-bold text-white md:text-5xl">
+            <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
               {event.title}
             </h1>
-            <div className="flex flex-wrap gap-4 text-white/90 mb-4">
-              <div className="flex items-center">
-                <CalendarDays size={18} className="mr-2 text-ngo-orange" />
-                <span>{format(new Date(event.date), 'MMMM d, yyyy')}</span>
+            <div className="flex flex-wrap gap-4 text-white/90">
+              <div className="flex items-center gap-2">
+                <Calendar size={18} />
+                <span>{format(new Date(event.date), "MMMM dd, yyyy")}</span>
               </div>
-              <div className="flex items-center">
-                <MapPin size={18} className="mr-2 text-ngo-orange" />
+              <div className="flex items-center gap-2">
+                <MapPin size={18} />
                 <span>{event.location}</span>
               </div>
             </div>
-            <p className="text-white/90 text-lg max-w-3xl">
-              {event.description}
-            </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Event Details */}
-      <section className="section-padding">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="md:col-span-2">
-              <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: event.content }} />
+      {/* Content Section */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="mb-8">
+          <Link
+            to="/events"
+            className="inline-flex items-center text-ngo-orange hover:underline"
+          >
+            <ArrowLeft size={16} className="mr-2" />
+            <span>Back to Events</span>
+          </Link>
+        </div>
 
-              {/* Event Gallery if available */}
-              {relatedImages.length > 0 && (
-                <div className="mt-12">
-                  <h3 className="text-2xl font-bold mb-6">Event Gallery</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {relatedImages.map((image: any) => (
-                      <div key={image.id} className="rounded-lg overflow-hidden h-48">
-                        <img 
-                          src={image.imageUrl} 
-                          alt={image.title}
-                          className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
-                        />
-                      </div>
-                    ))}
+        <div className="grid gap-8 md:grid-cols-3">
+          {/* Main Content */}
+          <div className="md:col-span-2">
+            <div className="rounded-lg bg-white p-6 shadow-md">
+              <h2 className="mb-4 text-2xl font-bold">Event Details</h2>
+              <div 
+                className="prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: event.content }}
+              />
+              
+              {event.gallery && event.gallery.length > 0 && (
+                <div className="mt-8">
+                  <h3 className="mb-4 text-xl font-bold">Event Gallery</h3>
+                  <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                    {event.gallery.map((galleryId: number, index: number) => {
+                      const galleryImage = siteData.gallery.find(
+                        (g) => g.id === galleryId
+                      );
+                      return (
+                        galleryImage && (
+                          <div
+                            key={index}
+                            className="overflow-hidden rounded-lg"
+                          >
+                            <img
+                              src={galleryImage.imageUrl}
+                              alt={galleryImage.title}
+                              className="h-40 w-full object-cover transition-transform duration-300 hover:scale-110"
+                            />
+                          </div>
+                        )
+                      );
+                    })}
                   </div>
                 </div>
               )}
             </div>
+          </div>
 
-            <div>
-              {/* Action Sidebar */}
-              <div className="bg-gray-50 rounded-xl p-6 sticky top-24">
-                <h3 className="text-xl font-bold mb-4">Event Information</h3>
-                
-                <div className="mb-6">
-                  <div className="flex items-center mb-2">
-                    <Calendar size={18} className="mr-2 text-ngo-orange" />
-                    <span className="font-medium">Date:</span>
-                  </div>
-                  <p>{format(new Date(event.date), 'MMMM d, yyyy')}</p>
-                </div>
-                
-                <div className="mb-6">
-                  <div className="flex items-center mb-2">
-                    <MapPin size={18} className="mr-2 text-ngo-orange" />
-                    <span className="font-medium">Location:</span>
-                  </div>
-                  <p>{event.location}</p>
-                </div>
-                
-                {/* Conditionally show relevant event actions */}
-                {event.tickets && event.tickets.available && !isPastEvent && (
-                  <div className="mb-6">
-                    <p className="mb-3 font-medium">Ticket Price: {event.tickets.price}</p>
-                    <Link to={event.tickets.link}>
-                      <Button className="w-full bg-ngo-orange hover:bg-ngo-orange/90">
-                        Book Tickets
-                      </Button>
-                    </Link>
-                  </div>
-                )}
-                
-                {event.registration && event.registration.open && !isPastEvent && (
-                  <div className="mb-6">
-                    <p className="mb-2 font-medium">Registration Open</p>
-                    <p className="mb-3 text-sm">Deadline: {format(new Date(event.registration.deadline), 'MMMM d, yyyy')}</p>
-                    <Link to={event.registration.link}>
-                      <Button className="w-full bg-ngo-orange hover:bg-ngo-orange/90">
-                        Register Now
-                      </Button>
-                    </Link>
-                  </div>
-                )}
-                
-                {event.volunteer && event.volunteer.needed && !isPastEvent && (
-                  <div className="mb-6">
-                    <p className="mb-2 font-medium">Volunteers Needed</p>
-                    <p className="mb-3 text-sm">Positions: {event.volunteer.positions}</p>
-                    <Link to={event.volunteer.link}>
-                      <Button className="w-full bg-ngo-blue hover:bg-ngo-blue/90">
-                        <Users size={16} className="mr-2" />
-                        Volunteer
-                      </Button>
-                    </Link>
-                  </div>
-                )}
-                
-                {isPastEvent && (
-                  <div className="mb-6">
-                    <p className="text-gray-500">This event has already taken place.</p>
-                  </div>
-                )}
-                
-                <Link to="/events">
-                  <Button variant="outline" className="w-full mt-4">
-                    <ArrowLeft size={16} className="mr-2" />
-                    Back to Events
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Event Actions */}
+            <div className="rounded-lg bg-white p-6 shadow-md">
+              <h3 className="mb-4 text-xl font-bold">Event Actions</h3>
+              
+              {isUpcoming && event.tickets && event.tickets.available && (
+                <div className="mb-6 space-y-4">
+                  <p className="font-medium">Tickets Available</p>
+                  <p className="text-lg font-bold text-ngo-orange">
+                    {event.tickets.price}
+                  </p>
+                  <Button
+                    asChild
+                    className="w-full bg-ngo-orange hover:bg-ngo-orange/90"
+                  >
+                    <Link to={event.tickets.link}>Book Tickets</Link>
                   </Button>
-                </Link>
+                </div>
+              )}
+              
+              {isUpcoming && event.registration && event.registration.open && (
+                <div className="mb-6 space-y-4">
+                  <p className="font-medium">Registration Open</p>
+                  <p className="text-sm text-gray-600">
+                    Registration closes on{" "}
+                    {format(
+                      new Date(event.registration.deadline),
+                      "MMMM dd, yyyy"
+                    )}
+                  </p>
+                  <Button
+                    asChild
+                    className="w-full bg-ngo-orange hover:bg-ngo-orange/90"
+                  >
+                    <Link to={event.registration.link}>Register Now</Link>
+                  </Button>
+                </div>
+              )}
+              
+              {isUpcoming && event.volunteer && event.volunteer.needed && (
+                <div className="space-y-4">
+                  <p className="font-medium">Volunteers Needed</p>
+                  <p className="text-sm text-gray-600">
+                    {event.volunteer.positions} positions available
+                  </p>
+                  <Button asChild className="w-full">
+                    <Link to={event.volunteer.link} className="inline-flex items-center justify-center">
+                      <UserCheck size={16} className="mr-2" />
+                      <span>Volunteer for this Event</span>
+                    </Link>
+                  </Button>
+                </div>
+              )}
+              
+              {!isUpcoming && (
+                <div className="text-gray-600">
+                  <p>This event has already taken place.</p>
+                  {event.gallery && event.gallery.length > 0 && (
+                    <p className="mt-2">
+                      Check out the event gallery to see highlights from this event.
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+            
+            {/* Share Event */}
+            <div className="rounded-lg bg-white p-6 shadow-md">
+              <h3 className="mb-4 text-xl font-bold">Share Event</h3>
+              <div className="flex gap-4">
+                <Button variant="outline" size="sm">
+                  Facebook
+                </Button>
+                <Button variant="outline" size="sm">
+                  Twitter
+                </Button>
+                <Button variant="outline" size="sm">
+                  WhatsApp
+                </Button>
+              </div>
+            </div>
+            
+            {/* Contact Info */}
+            <div className="rounded-lg bg-white p-6 shadow-md">
+              <h3 className="mb-4 text-xl font-bold">Need Information?</h3>
+              <p className="mb-4 text-gray-600">
+                For any queries related to this event, please contact us:
+              </p>
+              <div className="space-y-2 text-gray-700">
+                <p className="flex items-center gap-2">
+                  <span className="font-medium">Email:</span>{" "}
+                  {siteData.contact.email}
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="font-medium">Phone:</span>{" "}
+                  {siteData.contact.phone[0]}
+                </p>
               </div>
             </div>
           </div>
