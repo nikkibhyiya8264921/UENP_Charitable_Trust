@@ -8,6 +8,7 @@ import IconCard from "@/components/IconCard";
 import ProgramCard from "@/components/ProgramCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ImpactCounter from "@/components/ImpactCounter";
+import NewspaperHighlights from "@/components/NewspaperHighlights";
 import { ArrowRight, Users, Landmark, UserCheck, DollarSign } from "lucide-react";
 
 const Home = () => {
@@ -17,6 +18,9 @@ const Home = () => {
     <div>
       {/* Hero Section */}
       <HeroSlider />
+
+      {/* Newspaper Highlights */}
+      <NewspaperHighlights />
 
       {/* Mission & Vision */}
       <section className="section-padding">
@@ -125,7 +129,7 @@ const Home = () => {
           <div className="mt-12 text-center">
             <Button asChild className="btn-secondary-gradient rounded-full">
               <Link to="/programs" className="inline-flex items-center">
-                <span>Explore All Programs</span>
+                <span>Explore All Events</span>
                 <ArrowRight size={16} className="ml-2" />
               </Link>
             </Button>

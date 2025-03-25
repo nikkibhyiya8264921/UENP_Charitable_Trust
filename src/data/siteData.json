@@ -1,4 +1,3 @@
-
 {
   "organization": {
     "name": "Utthan Ek Nayi Pahal",
@@ -332,5 +331,147 @@
     "villages": 100,
     "programs": 15,
     "volunteers": 500
-  }
+  },
+  "newspaperImages": [
+    {
+      "id": 1,
+      "title": "Community Outreach Coverage",
+      "description": "Local newspaper coverage of our education initiative",
+      "imageUrl": "/images/newspaper/news1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Healthcare Camp Feature",
+      "description": "News article about our rural healthcare camp",
+      "imageUrl": "/images/newspaper/news2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Women Empowerment Program",
+      "description": "Feature on our vocational training program for women",
+      "imageUrl": "/images/newspaper/news3.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Clean Water Initiative",
+      "description": "Coverage of our water purification project",
+      "imageUrl": "/images/newspaper/news4.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Education Awards",
+      "description": "Recognition of our education programs",
+      "imageUrl": "/images/newspaper/news5.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Rural Development Feature",
+      "description": "Article on our impact in rural communities",
+      "imageUrl": "/images/newspaper/news6.jpg"
+    },
+    {
+      "id": 7,
+      "title": "Disaster Relief Coverage",
+      "description": "News on our emergency response efforts",
+      "imageUrl": "/images/newspaper/news7.jpg"
+    },
+    {
+      "id": 8,
+      "title": "Annual Fundraiser",
+      "description": "Coverage of our fundraising gala",
+      "imageUrl": "/images/newspaper/news8.jpg"
+    },
+    {
+      "id": 9,
+      "title": "Youth Leadership Program",
+      "description": "Feature on our youth development initiatives",
+      "imageUrl": "/images/newspaper/news9.jpg"
+    },
+    {
+      "id": 10,
+      "title": "Environmental Initiative",
+      "description": "Article on our tree plantation drive",
+      "imageUrl": "/images/newspaper/news10.jpg"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "title": "Annual Fundraising Gala",
+      "date": "2024-06-15",
+      "location": "Hotel Taj Palace, New Delhi",
+      "description": "Join us for our annual fundraising gala dinner to support our education initiatives. The evening will feature cultural performances, auctions, and speeches from beneficiaries.",
+      "imageUrl": "/images/events/fundraiser.jpg",
+      "status": "upcoming",
+      "content": "<p>Our Annual Fundraising Gala is our most prestigious event of the year, bringing together donors, supporters, and community leaders to celebrate our achievements and raise funds for future programs.</p><p>The evening will include:</p><ul><li>Welcome reception</li><li>Cultural performances by children from our education centers</li><li>Keynote speech by renowned social activist</li><li>Silent and live auctions</li><li>Gourmet dinner</li><li>Testimonials from program beneficiaries</li></ul><p>All proceeds from the event will go directly to supporting our education programs for underprivileged children.</p>",
+      "tickets": {
+        "available": true,
+        "price": "₹5,000",
+        "link": "/events/fundraiser-tickets"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Rural Healthcare Camp",
+      "date": "2024-04-30",
+      "location": "Barabanki District, Uttar Pradesh",
+      "description": "A three-day healthcare camp providing free medical consultations, medicines, and health awareness sessions to rural communities.",
+      "imageUrl": "/images/events/healthcare-camp.jpg",
+      "status": "completed",
+      "content": "<p>Our team of doctors and healthcare professionals provided free medical services to over 1,200 villagers during this three-day camp. Services included:</p><ul><li>General health check-ups</li><li>Eye examinations</li><li>Dental care</li><li>Women's health services</li><li>Distribution of free medicines</li><li>Health education workshops</li></ul><p>The camp successfully addressed various healthcare needs of the community and identified several cases that required further medical attention, which we arranged at partner hospitals.</p>",
+      "gallery": [1, 5, 7, 8]
+    },
+    {
+      "id": 3,
+      "title": "Education Workshop for Teachers",
+      "date": "2024-05-20",
+      "location": "Utthan Training Center, Noida",
+      "description": "A workshop for rural teachers on innovative teaching methodologies and use of technology in education.",
+      "imageUrl": "/images/events/teacher-workshop.jpg",
+      "status": "upcoming",
+      "content": "<p>This intensive two-day workshop aims to equip rural teachers with modern teaching techniques and tools to enhance learning outcomes in their classrooms.</p><p>Workshop topics include:</p><ul><li>Activity-based learning approaches</li><li>Using low-cost teaching aids</li><li>Digital literacy for educators</li><li>Child psychology and inclusive education</li><li>Creative assessment methods</li></ul><p>Participating teachers will receive a resource kit with teaching materials they can immediately implement in their classrooms.</p>",
+      "registration": {
+        "open": true,
+        "deadline": "2024-05-10",
+        "link": "/events/teacher-workshop-registration"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Tree Plantation Drive",
+      "date": "2024-07-05",
+      "location": "Multiple villages in Noida district",
+      "description": "An initiative to plant 5,000 trees across 10 villages with community participation to promote environmental conservation.",
+      "imageUrl": "/images/events/tree-plantation.jpg",
+      "status": "upcoming",
+      "content": "<p>As part of our environmental conservation efforts, we're organizing a massive tree plantation drive across 10 villages in Noida district. The initiative aims to:</p><ul><li>Increase green cover in rural areas</li><li>Promote environmental awareness</li><li>Engage local communities in conservation efforts</li><li>Create sustainable village ecosystems</li></ul><p>We'll be planting native tree species that are well-suited to the local climate and provide economic benefits to villagers, such as fruit-bearing trees and species with medicinal properties.</p><p>Join us as a volunteer for this important environmental initiative!</p>",
+      "volunteer": {
+        "needed": true,
+        "positions": 150,
+        "link": "/events/plantation-volunteer"
+      }
+    },
+    {
+      "id": 5,
+      "title": "Women Entrepreneurship Fair",
+      "date": "2024-08-15",
+      "location": "Community Hall, Sector 63, Noida",
+      "description": "A platform for women entrepreneurs from our skill development programs to showcase and sell their products directly to customers.",
+      "imageUrl": "/images/events/women-fair.jpg",
+      "status": "upcoming",
+      "content": "<p>The Women Entrepreneurship Fair celebrates the achievements of women who have completed our vocational training and entrepreneurship programs. This one-day exhibition gives them a platform to:</p><ul><li>Showcase their products and services</li><li>Connect with potential customers</li><li>Network with other entrepreneurs</li><li>Gain market exposure</li></ul><p>Products available at the fair will include handcrafted items, garments, accessories, home décor, food products, and more - all made by women entrepreneurs from underprivileged backgrounds who are now running their own small businesses.</p><p>Entry is free and open to all. Come support these inspiring women entrepreneurs!</p>"
+    },
+    {
+      "id": 6,
+      "title": "Children's Day Celebration",
+      "date": "2023-11-14",
+      "location": "Utthan Education Centers across NCR",
+      "description": "A day of fun activities, games, and cultural performances to celebrate Children's Day across all our education centers.",
+      "imageUrl": "/images/events/childrens-day.jpg",
+      "status": "completed",
+      "content": "<p>We celebrated Children's Day across all our education centers with a variety of activities designed to bring joy and learning to the children. The day included:</p><ul><li>Cultural performances by children</li><li>Art and craft competitions</li><li>Sports activities and games</li><li>Distribution of educational kits and gifts</li><li>Special meals for all children</li></ul><p>Over 2,000 children participated in the celebrations. It was heartwarming to see their enthusiasm and creativity on display throughout the day.</p>",
+      "gallery": [2, 9, 3, 10]
+    }
+  ]
 }
+

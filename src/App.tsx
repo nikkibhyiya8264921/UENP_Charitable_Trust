@@ -1,120 +1,45 @@
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SiteDataProvider } from "@/context/SiteDataContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
-import Programs from "@/pages/Programs";
+import Events from "@/pages/Events";
+import EventDetail from "@/pages/EventDetail";
 import Gallery from "@/pages/Gallery";
 import Team from "@/pages/Team";
 import Contact from "@/pages/Contact";
 import Donate from "@/pages/Donate";
-import AdminLogin from "@/components/AdminLogin";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import NotFound from "@/pages/NotFound";
+import "./App.css";
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+function App() {
+  return (
     <SiteDataProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+      <Router>
+        <Navbar />
+        <main className="min-h-screen pt-16 bg-white">
           <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Navbar />
-                  <Home />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/about"
-              element={
-                <>
-                  <Navbar />
-                  <About />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/programs"
-              element={
-                <>
-                  <Navbar />
-                  <Programs />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/gallery"
-              element={
-                <>
-                  <Navbar />
-                  <Gallery />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/team"
-              element={
-                <>
-                  <Navbar />
-                  <Team />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/contact"
-              element={
-                <>
-                  <Navbar />
-                  <Contact />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/donate"
-              element={
-                <>
-                  <Navbar />
-                  <Donate />
-                  <Footer />
-                </>
-              }
-            />
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route
-              path="*"
-              element={
-                <>
-                  <Navbar />
-                  <NotFound />
-                  <Footer />
-                </>
-              }
-            />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/events/:eventId" element={<EventDetail />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/donate" element={<Donate />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+        </main>
+        <Footer />
+        <Toaster />
+      </Router>
     </SiteDataProvider>
-  </QueryClientProvider>
-);
+  );
+}
 
 export default App;
