@@ -1,69 +1,61 @@
-# Welcome to your Lovable project
+# NGO & Charitable Trust Website
 
-## Project info
+## Overview
+This project, **UENP Charitable Trust**, is a complete redesign and redevelopment of an NGO and charitable trust website, inspired by [Utthan Ek Nayi Pahal](https://utthaneknayipahal.com/). The goal is to create a modern, appealing, and user-friendly website that resonates with the Indian audience while maintaining the essence of the original NGO.
 
-**URL**: https://lovable.dev/projects/19134725-44be-4f7b-8e20-77c9066228c6
+## Features
+- **Multi-page Website**: Professionally designed, responsive, and visually appealing.
+- **Dynamic Content Management**: Admin panel to update images, contact details, and textual content.
+- **JSON-Based Data Handling**: Storing images, URLs, and textual data in a JSON file system.
+- **Image Sliders & Galleries**: Showcasing NGO activities dynamically.
+- **Contact Section**: Email, mobile number, and address with interactive UI.
+- **Indian Cultural Aesthetic**: Designed to connect deeply with the Indian audience.
 
-## How can I edit this code?
+## Tech Stack
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Node.js / PHP (as per preference)
+- **Database**: JSON file system for content management
+- **Deployment**: Can be hosted on any server supporting dynamic content handling
 
-There are several ways of editing your application.
+## Setup Instructions
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/nikkibhyiya8264921/UENP_Charitable_Trust.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd UENP_Charitable_Trust
+   ```
+3. Install dependencies (if applicable):
+   ```bash
+   npm install  # For Node.js-based backend
+   ```
+4. Run the project:
+   ```bash
+   npm start  # For Node.js server
+   ```
+   OR
+   ```bash
+   php -S localhost:8000  # For PHP server
+   ```
+5. Open the website in your browser:
+   ```
+   http://localhost:8000
+   ```
 
-**Use Lovable**
+## Admin Panel
+- The admin page allows easy updates to content, images, and other website elements dynamically.
+- Access the admin panel at `http://localhost:8000/admin` (or equivalent based on setup).
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/19134725-44be-4f7b-8e20-77c9066228c6) and start prompting.
+## Contribution
+Feel free to fork the project, create pull requests, or suggest improvements!
 
-Changes made via Lovable will be committed automatically to this repo.
+## Author
+👨‍💻 **Nikhil Bhaiya** – Passionate about building impactful digital solutions for NGOs and businesses.
 
-**Use your preferred IDE**
+## License
+This project is licensed under the MIT License.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
+💙 Made for NGOs and charitable trusts to create an impactful online presence!
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/19134725-44be-4f7b-8e20-77c9066228c6) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
